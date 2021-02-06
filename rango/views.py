@@ -19,6 +19,7 @@ def index(request):
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
+    
     return render(request, 'rango/index.html', context=context_dict)
 
 
@@ -55,7 +56,7 @@ def add_category(request):
             cat = form.save(commit=True)
             print(cat, cat.slug)
 
-            return redirect('/rango/')
+            return redirect(reverse('rango:index'))
         else:
             print(form.errors)
 
@@ -69,7 +70,7 @@ def add_page(request, category_name_slug):
         category = None
 
     if category is None:
-        return redirect('/rango/')
+        return redirect(reverse('rango:index'))
 
     form = PageForm()
 
